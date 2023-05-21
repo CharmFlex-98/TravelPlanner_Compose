@@ -47,23 +47,25 @@ import com.example.travelplanner.R
 import com.example.travelplanner.data.sampleTravelData
 import com.example.travelplanner.model.TravelPlan
 import com.example.travelplanner.ui.theme.TravelPlannerTheme
+import com.example.travelplanner.utils.TPMainPageTopAppBar
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TravelPlanScreen(
-    travelPlansViewModel: TravelPlansViewModel = viewModel()
+    travelPlansViewModel: TravelPlansViewModel = viewModel(),
+    onAddEditTravelPlan: () -> Unit,
 ) {
     Scaffold(
+
         modifier = Modifier.fillMaxSize(),
-        floatingActionButton = { FAB() },
+        topBar = { TPMainPageTopAppBar { } },
+        floatingActionButton = { FAB(onAddEditTravelPlan) },
     ) {
         Column(
             modifier = Modifier
                 .padding(it),
-
-
-            ) {
+        ) {
             UtilitiesSection(Modifier.weight(0.3f))
             TravelList(Modifier.weight(0.7f), travelPlansViewModel)
         }
@@ -73,9 +75,9 @@ fun TravelPlanScreen(
 }
 
 @Composable
-fun FAB() {
+fun FAB(onClick: () -> Unit) {
     FloatingActionButton(
-        onClick = { /*TODO*/ },
+        onClick = onClick,
     ) {
         Icon(
             imageVector = Icons.Filled.AddCircle,
@@ -151,6 +153,6 @@ fun testing(t: String) {}
 @Composable
 fun Preview2() {
     TravelPlannerTheme {
-        TravelPlanScreen()
+        TravelPlanScreen() {}
     }
 }
