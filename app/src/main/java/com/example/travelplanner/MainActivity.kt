@@ -13,13 +13,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.travelplanner.data.SampleRepo
 import com.example.travelplanner.ui.new_edit_travel_plan.NewEditTravelPlanScreen
 import com.example.travelplanner.ui.theme.TravelPlannerTheme
 import com.example.travelplanner.ui.travel_plans.TravelPlanScreen
+import com.example.travelplanner.ui.travel_plans.TravelPlansViewModel
 
 // Enum for navigation path
 enum class TPNavigationPath {
@@ -53,7 +56,7 @@ fun TravelPlanAppNavHost(
             TravelPlanScreen(onAddEditTravelPlan = { navController.navigateToAddEditTPPage() })
         }
         composable(TPNavigationPath.NEW_EDIT.name) {
-            NewEditTravelPlanScreen(onBackIconClick = { navController.popBackStack() })
+            NewEditTravelPlanScreen(onBackIconClick = { navController.popBackStack() }, onUpdateCompleted = { navController.popBackStack()})
         }
     }
 }

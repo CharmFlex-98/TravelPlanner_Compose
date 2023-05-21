@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.travelplanner.R
+import com.example.travelplanner.data.SampleRepo
 import com.example.travelplanner.data.sampleTravelData
 import com.example.travelplanner.model.TravelPlan
 import com.example.travelplanner.ui.theme.TravelPlannerTheme
@@ -108,8 +109,8 @@ fun TravelList(
     travelPlansViewModel: TravelPlansViewModel = viewModel()
 ) {
     val uiState by travelPlansViewModel.uiState.collectAsStateWithLifecycle()
-    val travelPlans = sampleTravelData
-    if (false) {
+    val travelPlans = uiState.items
+    if (travelPlans.isEmpty()) {
         Text(
             modifier = modifier
                 .fillMaxSize()
